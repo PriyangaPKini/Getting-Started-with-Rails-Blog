@@ -7,7 +7,11 @@ agent:
 blocks:
   - name: Test
     task:
-      env_vars: []
+      env_vars:
+        - name: DATABASE_URL
+          value: 'postgresql://postgres:@0.0.0.0:5432/notation_test'
+        - name: RAILS_ENV
+          value: test
       jobs:
         - name: Test
           commands:
