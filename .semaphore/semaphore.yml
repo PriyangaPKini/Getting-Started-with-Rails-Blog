@@ -16,9 +16,9 @@ blocks:
         - name: Test
           commands:
             - checkout
+            - sem-service start postgres
             - sem-version ruby 2.6.8
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store
-            - sem-service start postgres
             - 'bundle exec rake db:setup'
