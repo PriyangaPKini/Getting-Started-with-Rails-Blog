@@ -17,4 +17,5 @@ blocks:
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store
-            - 'bundle exec rake db:setup'
+            - 'bundle exec rake db:schema:load'
+            - 'bundle exec rake db:seed'
