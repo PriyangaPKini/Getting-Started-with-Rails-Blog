@@ -21,7 +21,7 @@ blocks:
         - Setup
     task:
       jobs:
-        - name: check style + security
+        - name: check style
           commands:
             - sem-version ruby 2.7.3
             - sem-version node 14.16.1
