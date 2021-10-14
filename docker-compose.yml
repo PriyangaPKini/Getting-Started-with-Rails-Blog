@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  db:
+  postgres:
     image: postgres:10-alpine
     environment:
       - POSTGRES_USER=postgres
@@ -26,9 +26,9 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - postgres
     environment:
-      - BLOG_DATABASE_HOST=db
+      - BLOG_DATABASE_HOST=postgres
       - BLOG_DATABASE_USERNAME=postgres
       - BLOG_DATABASE_PASSWORD=root
       - BLOG_HOST_PROTOCOL=https
