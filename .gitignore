@@ -30,5 +30,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-#Ignore API credentials
-/config/.env
+# Idea IDE
+/.idea/*
+
+# Ignore env files which contains secret credentials
+.env
