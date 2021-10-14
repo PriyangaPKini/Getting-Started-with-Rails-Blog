@@ -17,19 +17,19 @@ blocks:
             - cache store
     dependencies: []
   - name: Code scanning
-      dependencies:
+    dependencies:
         - Setup
-      task:
-        jobs:
-          - name: check style + security
-            commands:
-              - sem-version ruby 2.7.3
-              - sem-version node 14.16.1
-              - checkout
-              - cache restore
-              - bundle install
-              - cache store
-              - bundle exec standardrb
+    task:
+      jobs:
+        - name: check style + security
+          commands:
+            - sem-version ruby 2.7.3
+            - sem-version node 14.16.1
+            - checkout
+            - cache restore
+            - bundle install
+            - cache store
+            - bundle exec standardrb
   - name: Unit tests
     dependencies:
       - Code scanning
