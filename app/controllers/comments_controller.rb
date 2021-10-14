@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   http_basic_authenticate_with name: "Priyanga", password: "secret-key", only: :destroy
 
   def create
