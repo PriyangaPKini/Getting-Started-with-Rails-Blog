@@ -16,9 +16,23 @@ blocks:
             - sem-version ruby 2.6.8
             - cache store
     dependencies: []
+  - name: Code scanning
+      dependencies:
+        - Setup
+      task:
+        jobs:
+          - name: check style + security
+            commands:
+              - sem-version ruby 2.7.3
+              - sem-version node 14.16.1
+              - checkout
+              - cache restore
+              - bundle install
+              - cache store
+              - bundle exec standardrb
   - name: Unit tests
     dependencies:
-      - Setup
+      - Code scanning
     task:
       env_vars:
         - name: DATABASE_URL
@@ -34,12 +48,9 @@ blocks:
           - sem-service start postgres
           - 'bundle exec rake db:setup'
       jobs:
-        - name: RSpec - model tests
+        - name: RSpec - tests
           commands:
-            - bundle exec rspec spec/models
-        - name: RSpec - controller tests
-          commands:
-            - bundle exec rspec spec/controllers
+            - bundle exec rspec
   - name: Integration tests
     dependencies:
       - Unit tests
