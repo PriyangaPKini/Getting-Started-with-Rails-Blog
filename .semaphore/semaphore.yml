@@ -18,7 +18,7 @@ blocks:
     dependencies: []
   - name: Code scanning
     dependencies:
-        - Setup
+      - Setup
     task:
       jobs:
         - name: check style
@@ -30,7 +30,7 @@ blocks:
             - bundle install
             - cache store
             - bundle exec standardrb
-  - name: Unit tests
+  - name: Test
     dependencies:
       - Code scanning
     task:
@@ -51,25 +51,3 @@ blocks:
         - name: RSpec - tests
           commands:
             - bundle exec rspec
-  - name: Integration tests
-    dependencies:
-      - Unit tests
-    task:
-      env_vars:
-        - name: DATABASE_URL
-          value: 'postgresql://postgres:@0.0.0.0:5432/notation_test'
-        - name: RAILS_ENV
-          value: test
-      prologue:
-        commands:
-          - checkout
-          - cache restore
-          - sem-service start postgres 14
-          - sem-version ruby 2.6.8
-          - bundle install --deployment --path vendor/bundle
-          - 'bundle exec rake db:setup'
-      jobs:
-        - name: RSpec - feature specs
-          commands:
-            - bundle exec rspec spec/features
-            
